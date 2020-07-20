@@ -1,5 +1,7 @@
 import React from "react";
 import List from "./List";
+import AddTodo from "./AddTodo";
+import Nav from "../components/navbar/Nav";
 
 import styled from "styled-components";
 
@@ -10,23 +12,23 @@ import styled from "styled-components";
     - Delete items
 */
 const Title = styled.h1`
-text-align: center;
-padding-top: 20px;
-font-family: sans-serif;
-font-weight: 100;
+  text-align: center;
+  padding-top: 20px;
+  font-family: sans-serif;
+  font-weight: 100;
 `;
 
 const Header = styled.header`
   background: papayawhip;
   min-height: 500px;
-  width: 400px;
+  width: 600px;
   margin: 40px auto;
 `;
 
 const Input = styled.input`
   background: #ddcaaf;
   height: 30px;
-  width: 255px;
+  width: 400px;
   border: none;
   outline: none;
   border-radius: 9px;
@@ -37,7 +39,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 65px;
+  width: 20%;
   height: 44px;
   padding: 10px;
   background: #fe846e;
@@ -49,34 +51,16 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const ToDo = props => {
-    
+const ToDo = (props) => {
+  return (
+    <div>
+      <Header>
+        <Nav />
+        <AddTodo />
+        <List setUpdate={props.setUpdate} deleteItem={props.deleteItem}></List>
+      </Header>
+    </div>
+  );
+};
 
-
- 
-    return (
-      <div>
-        <Header>
-        <Title>My To-Do List</Title>
-          <form onSubmit={props.addItem}>
-            <Input
-              className="hello"
-              type="text"
-              placeholder="Enter task"
-              value={props.currentItem.text}
-              onChange={props.handleInput}
-            />
-
-            <Button type="submit">ADD</Button>
-          </form>
-
-          <List
-            items={props.items} setUpdate={props.setUpdate} deleteItem={props.deleteItem}  
-          ></List>
-        </Header>
-      </div>
-    );
-  
-}
-
-export default ToDo
+export default ToDo;

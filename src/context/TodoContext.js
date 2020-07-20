@@ -1,6 +1,7 @@
 import {createContext} from "react";
 
-
-const itemsContext = createContext(null)
+const itemsContext = createContext({
+  items:[],
+})
 
 export default itemsContext

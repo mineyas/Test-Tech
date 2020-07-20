@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import TodoContext from "../context/TodoContext";
 
 import styled from "styled-components";
 
 import dlt from "../assets/trash.svg";
 
-
-
 const Task = styled.div`
-  height: 50px;
-  width: 300px;
+  height: 10%;
+  width: 80%;
   margin: 10px auto;
   background-color: #fc6a6a;
   border-radius: 5px;
@@ -21,7 +20,7 @@ const Task = styled.div`
 `;
 
 const TaskDetail = styled.p`
-margin-left: 8px;
+  margin-left: 8px;
 `;
 
 const ButtonDel = styled.img`
@@ -31,7 +30,7 @@ const ButtonDel = styled.img`
   border: none;
   color: brown;
   cursor: pointer;
-  width: 16px;
+  width: 5%;
 `;
 
 const Edit = styled.input`
@@ -44,7 +43,23 @@ const Edit = styled.input`
 `;
 
 function List(props) {
-  const items = props.items;
+  const { items, setItems } = useContext(TodoContext);
+
+  const deleteItem = (key) => {
+    const filteredItems = items.filter((item) => item.key !== key);
+    setItems(filteredItems);
+  };
+
+  const setUpdate = (text, key) => {
+    const updatedItems = items.map((item) => {
+      if (item.key === key) {
+        return { ...item, text };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
+
   const listItems = items.map((item) => {
     return (
       <Task key={item.key}>
@@ -54,15 +69,11 @@ function List(props) {
             id={item.key}
             value={item.text}
             onChange={(e) => {
-              props.setUpdate(e.target.value, item.key);
+              setUpdate(e.target.value, item.key);
             }}
           />
         </TaskDetail>
-        <ButtonDel
-          onClick={() => props.deleteItem(item.key)}
-          alt=""
-          src={dlt}
-        />
+        <ButtonDel onClick={() => deleteItem(item.key)} alt="" src={dlt} />
       </Task>
     );
   });
