@@ -11,6 +11,7 @@ import styled from "styled-components";
     - Edit items
     - Delete items
 */
+
 const Title = styled.h1`
   text-align: center;
   padding-top: 20px;
@@ -21,7 +22,7 @@ const Title = styled.h1`
 const Header = styled.header`
   background: papayawhip;
   min-height: 500px;
-  width: 600px;
+  width: 390px;
   margin: 40px auto;
 `;
 
@@ -57,7 +58,7 @@ const ToDo = (props) => {
       <Header>
         <Nav />
         <AddTodo />
-        <List setUpdate={props.setUpdate} deleteItem={props.deleteItem}></List>
+        <List />
       </Header>
     </div>
   );
